@@ -71,7 +71,7 @@
 
     /* Content Section */
     .content-section {
-       background-color: skyblue;
+      background-color: skyblue;
       padding: 20px 0;
       margin: 20px 0;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -150,6 +150,7 @@
     <div class="container">
       <ul>
         <li><a href="#" onclick="showSection('identitas')">Identitas Desa</a></li>
+        <li><a href="#" onclick="showSection('visi')">Visi & Misi</a></li>
         <li><a href="#" onclick="showSection('dokumen')">Dokumen & Izin</a></li>
         <li><a href="#" onclick="showSection('agama')">Agama</a></li>
         <li><a href="#" onclick="showSection('sarana')">Ketersediaan</a></li>
@@ -237,40 +238,46 @@
       </table>
     </section>
 
+    <section id="visi" class="content-section">
+        <h2>Visi dan Misi Kepala Desa</h2>
+        <p>Visi dan misi kepala desa mencerminkan arah dan tujuan yang ingin dicapai selama masa jabatannya. Bagian ini memberikan informasi mengenai rencana pembangunan desa jangka pendek dan jangka panjang, serta langkah-langkah strategis yang akan diambil untuk mewujudkan visi tersebut.</p>
+    </section>
+
     <section id="agama" class="content-section">
-        <h2>Agama</h2>
-        <table>
-          <tr>
-            <td>Islam</td>
-            <td>:</td>
-            <td>1,50%<sup>2</sup></td>
-          </tr>
-          <tr>
-            <td>Kristen Protestan</td>
-            <td>:</td>
-            <td>90,41%</td>
-          </tr>
-          <tr>
-            <td>Kristen Katolik</td>
-            <td>:</td>
-            <td>8,08%</td>
-          </tr>
-          <tr>
-            <td>Hindu</td>
-            <td>:</td>
-            <td>0,00%</td>
-          </tr>
-          <tr>
-            <td>Budha</td>
-            <td>:</td>
-            <td>0,00%</td>
-            <tr>
-                <td>Konghucu</td>
-                <td>:</td>
-                <td>0,00%</td>
-              </tr>
-        </table>
-      </section>
+      <h2>Agama</h2>
+      <table>
+        <tr>
+          <td>Islam</td>
+          <td>:</td>
+          <td>1,50%<sup>2</sup></td>
+        </tr>
+        <tr>
+          <td>Kristen Protestan</td>
+          <td>:</td>
+          <td>90,41%</td>
+        </tr>
+        <tr>
+          <td>Kristen Katolik</td>
+          <td>:</td>
+          <td>8,08%</td>
+        </tr>
+        <tr>
+          <td>Hindu</td>
+          <td>:</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Budha</td>
+          <td>:</td>
+          <td>0,00%</td>
+        </tr>
+        <tr>
+          <td>Konghucu</td>
+          <td>:</td>
+          <td>0,00%</td>
+        </tr>
+      </table>
+    </section>
 
     <section id="sarana" class="content-section">
       <h2>Ketersediaan</h2>
@@ -352,9 +359,11 @@
     L.marker([1.906900, 98.637100]).addTo(map)
       .bindPopup("<b>Desa Gonting Mahe</b>")
       .openPopup();
-      document.addEventListener('contextmenu', function(event) { 
-        event.preventDefault(); 
-            alert("Klik kanan dinonaktifkan By Ayub"); });
+    
+    document.addEventListener('contextmenu', function(event) { 
+      event.preventDefault(); 
+      alert("Klik kanan dinonaktifkan By Ayub Situmeang"); 
+    });
   </script>
 </body>
 </html>
