@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Website Desa Gonting Mahe</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background-color: #f4f4f4;
+    }
+
+    /* Container umum */
+    .container {
+      width: 80%;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      background: #333;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin-top: 10px;
+      font-size: 2em;
+    }
+
+    header .logo img {
+      width: 100px;  /* Ukuran logo */
+      display: block;
+      margin: 20px auto;  /* Posisi logo di tengah dan memberi jarak */
+    }
+
+    /* Navigation */
+    nav {
+      background: #333;
+      color: #fff;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Content Section */
+    .content-section {
+      background-color: #fff;
+      padding: 20px 0;
+      margin: 20px 0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      display: none; /* Menyembunyikan semua section secara default */
+    }
+
+    .content-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .content-section table {
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .content-section td {
+      padding: 8px;
+      text-align: left;
+    }
+
+    .content-section td:nth-child(2) {
+      text-align: center;
+    }
+
+    .content-section td:nth-child(3) {
+      font-weight: bold;
+    }
+
+    /* Map */
+    #map {
+      height: 400px;
+      width: 100%;
+    }
+
+    /* Footer */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.9em;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .container {
+        width: 95%;
+      }
+
+      nav ul {
+        flex-direction: column;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>Desa Gonting Mahe</h1>
+    <!-- Logo di bawah judul -->
+    <div class="logo">
+      <img src="logo.png" alt="Logo Desa Gonting Mahe">
+    </div>
+  </header>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <ul>
+        <li><a href="#" onclick="showSection('identitas')">Identitas Desa</a></li>
+        <li><a href="#" onclick="showSection('dokumen')">Dokumen & Izin</a></li>
+        <li><a href="#" onclick="showSection('agama')">Agama</a></li>
+        <li><a href="#" onclick="showSection('sarana')">Ketersediaan</a></li>
+        <li><a href="#" onclick="showSection('kontak')">Kontak</a></li>
+        <li><a href="#" onclick="showSection('peta')">Peta Lokasi</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section id="identitas" class="content-section" style="display: block;">
+      <h2>Identitas Desa</h2>
+      <table>
+        <tr>
+          <td>Nama Desa</td>
+          <td>:</td>
+          <td>Desa Gonting Mahe</td>
+        </tr>
+        <tr>
+          <td>Nama Kepala Desa</td>
+          <td>:</td>
+          <td>Masri Hutauruk</td>
+        </tr>
+        <tr>
+          <td>Wakil Kepala Desa</td>
+          <td>:</td>
+          <td>Johson Hutagalung</td>
+        </tr>
+        <tr>
+          <td>Kecamatan</td>
+          <td>:</td>
+          <td>Sorkam</td>
+        </tr>
+        <tr>
+          <td>Kabupaten</td>
+          <td>:</td>
+          <td>Tapanuli Tengah</td>
+        </tr>
+        <tr>
+          <td>Provinsi</td>
+          <td>:</td>
+          <td>Sumatera Utara</td>
+        </tr>
+        <tr>
+          <td>Jumlah Keluarga</td>
+          <td>:</td>
+          <td>1.0000 Keluarga</td>
+        </tr>
+        <tr>
+          <td>Jumlah Laki-Laki</td>
+          <td>:</td>
+          <td>5.000</td>
+        </tr>
+        <tr>
+          <td>Jumlah Perempuan</td>
+          <td>:</td>
+          <td>5.000</td>
+        </tr>
+        <tr>
+          <td>Rata-Rata Pekerjaan</td>
+          <td>:</td>
+          <td>Petani</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="dokumen" class="content-section">
+      <h2>Dokumen & Izin</h2>
+      <table>
+        <tr>
+          <td>Kementerian Pembina</td>
+          <td>:</td>
+          <td>Kementerian Desa, PDT, dan Transmigrasi</td>
+        </tr>
+        <tr>
+          <td>Status Desa</td>
+          <td>:</td>
+          <td>Baik</td>
+        </tr>
+        <tr>
+          <td>Akreditasi</td>
+          <td>:</td>
+          <td>B</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="agama" class="content-section">
+        <h2>Agama</h2>
+        <table>
+          <tr>
+            <td>Islam</td>
+            <td>:</td>
+            <td>1,50%<sup>2</sup></td>
+          </tr>
+          <tr>
+            <td>Kristen Protestan</td>
+            <td>:</td>
+            <td>90,41%</td>
+          </tr>
+          <tr>
+            <td>Kristen Katolik</td>
+            <td>:</td>
+            <td>8,08%</td>
+          </tr>
+          <tr>
+            <td>Hindu</td>
+            <td>:</td>
+            <td>0,00%</td>
+          </tr>
+          <tr>
+            <td>Budha</td>
+            <td>:</td>
+            <td>0,00%</td>
+            <tr>
+                <td>Konghucu</td>
+                <td>:</td>
+                <td>0,00%</td>
+              </tr>
+        </table>
+      </section>
+
+    <section id="sarana" class="content-section">
+      <h2>Ketersediaan</h2>
+      <table>
+        <tr>
+          <td>Luas Tanah</td>
+          <td>:</td>
+          <td>2,000 m<sup>2</sup></td>
+        </tr>
+        <tr>
+          <td>Akses Internet</td>
+          <td>:</td>
+          <td>Tersedia</td>
+        </tr>
+        <tr>
+          <td>Sumber Listrik</td>
+          <td>:</td>
+          <td>PLN</td>
+        </tr>
+        <tr>
+          <td>PDAM</td>
+          <td>:</td>
+          <td>Tersedia</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="kontak" class="content-section">
+      <h2>Kontak</h2>
+      <table>
+        <tr>
+          <td>Email</td>
+          <td>:</td>
+          <td>desa.gontingmahe@gmail.com</td>
+        </tr>
+        <tr>
+          <td>Telepon</td>
+          <td>:</td>
+          <td>(+62) 87590985</td>
+        </tr>
+        <tr>
+          <td>Operator</td>
+          <td>:</td>
+          <td>Ayub Lasmartua Situmeang</td>
+        </tr>
+      </table>
+    </section>
+
+    <section id="peta" class="content-section">
+      <h2>Peta Lokasi</h2>
+      <div id="map"></div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Desa Gonting Mahe | All Rights Reserved By Ayub Situmeang</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    function showSection(sectionId) {
+      var sections = document.querySelectorAll('.content-section');
+      sections.forEach(function(section) {
+        section.style.display = 'none';
+      });
+
+      var activeSection = document.getElementById(sectionId);
+      activeSection.style.display = 'block';
+    }
+
+    var map = L.map('map').setView([1.906900, 98.637100], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    L.marker([1.906900, 98.637100]).addTo(map)
+      .bindPopup("<b>Desa Gonting Mahe</b>")
+      .openPopup();
+      document.addEventListener('contextmenu', function(event) { 
+        event.preventDefault(); 
+            alert("Klik kanan dinonaktifkan By Ayub"); });
+  </script>
+</body>
+</html>
